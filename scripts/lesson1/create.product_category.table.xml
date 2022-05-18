@@ -7,23 +7,31 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd
     http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.6.xsd ">
 
+    <changeSet id="before_create_product_category_table" author="safronov.igor">
+        <tagDatabase tag="before_create_product_category_table"/>
+    </changeSet>
 
-    таблица category
-    id bigserial
-    title varchar(255)
-
-    таблица manufacturer
-    ID   BIGSERIAL    NOT NULL PRIMARY KEY,
-    NAME VARCHAR(255) NOT NULL,
-
-    <changeSet id="create_product_category_table" author="kropotov.artem">
+    <changeSet id="create_product_category_table" author="safronov.igor">
         <createTable tableName="PRODUCT_CATEGORY">
-
+            <column name="PRODUCT_ID" type="BIGSERIAL">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CATEGORY_ID" type="BIGSERIAL">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
+
         <addPrimaryKey tableName="PRODUCT_CATEGORY" columnNames="PRODUCT_ID, CATEGORY_ID"/>
-        <addForeignKeyConstraint baseTableName="PRODUCT_CATEGORY" baseColumnNames="PRODUCT_ID" constraintName="FK"
+
+        <addForeignKeyConstraint baseTableName="PRODUCT_CATEGORY" baseColumnNames="PRODUCT_ID"
+                                 constraintName="FK_PRODUCT_CATEGORY_PRODUCT"
                                  referencedTableName="PRODUCT"
-                                 referencedColumnNames="ID"
+                                 referencedColumnNames="ID"/>
+
+        <addForeignKeyConstraint baseTableName="PRODUCT_CATEGORY" baseColumnNames="CATEGORY_ID"
+                                 constraintName="FK_PRODUCT_CATEGORY_CATEGORY"
+                                 referencedTableName="CATEGORY"
+                                 referencedColumnNames="ID"/>
     </changeSet>
 
 </databaseChangeLog>
