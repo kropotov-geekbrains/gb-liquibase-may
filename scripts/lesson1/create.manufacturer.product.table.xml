@@ -7,26 +7,27 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd
     http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.6.xsd ">
 
-    <changeSet id="create_product_category_table" author="salnikov.aleksey">
-        <createTable tableName="PRODUCT_CATEGORY">
+    <changeSet id="create_manufacturer_product_table" author="salnikov.aleksey">
+        <createTable tableName="MANUFACTURER_PRODUCT">
 
             <column name="PRODUCT_ID" type="BIGSERIAL">
                 <constraints nullable="false"/>
             </column>
-            <column name="CATEGORY_ID" type="BIGSERIAL">
+            <column name="MANUFACTURER_ID" type="BIGSERIAL">
                 <constraints nullable="false"/>
             </column>
+
         </createTable>
 
-        <addPrimaryKey tableName="PRODUCT_CATEGORY" columnNames="PRODUCT_ID, CATEGORY_ID"/>
+        <addPrimaryKey tableName="MANUFACTURER_PRODUCT" columnNames="PRODUCT_ID, MANUFACTURER_ID"/>
 
-        <addForeignKeyConstraint baseTableName="PRODUCT_CATEGORY" baseColumnNames="PRODUCT_ID"
-                                 constraintName="FK_PRODUCT_CATEGORY_PRODUCT"
+        <addForeignKeyConstraint baseTableName="MANUFACTURER_PRODUCT" baseColumnNames="PRODUCT_ID"
+                                 constraintName="FK_MANUFACTURER_PRODUCT_PRODUCT"
                                  referencedTableName="PRODUCT"
                                  referencedColumnNames="ID"/>
-        <addForeignKeyConstraint baseTableName="PRODUCT_CATEGORY" baseColumnNames="CATEGORY_ID"
-                                 constraintName="FK_PRODUCT_CATEGORY_CATEGORY"
-                                 referencedTableName="CATEGORY"
+        <addForeignKeyConstraint baseTableName="MANUFACTURER_PRODUCT" baseColumnNames="MANUFACTURER_ID"
+                                 constraintName="FK_MANUFACTURER_PRODUCT_MANUFACTURER"
+                                 referencedTableName="MANUFACTURER"
                                  referencedColumnNames="ID"/>
     </changeSet>
 </databaseChangeLog>

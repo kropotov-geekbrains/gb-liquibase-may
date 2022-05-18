@@ -7,11 +7,11 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd
     http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.6.xsd ">
 
-    <changeSet id="before_create_product_table" author="kropotov.artem">
+    <changeSet id="before_create_product_table" author="salnikov.aleksey">
         <tagDatabase tag="before_create_product_table"/>
     </changeSet>
 
-    <changeSet id="create_product_table" author="kropotov.artem">
+    <changeSet id="create_product_table" author="salnikov.aleksey">
         <createTable tableName="PRODUCT">
             <column name="ID" type="BIGSERIAL">
                 <constraints primaryKey="true" nullable="false"/>
@@ -37,5 +37,4 @@
             </column>
         </createTable>
     </changeSet>
-
 </databaseChangeLog>
