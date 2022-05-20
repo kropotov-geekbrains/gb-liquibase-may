@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd
+    http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.6.xsd ">
+
+
+<!--    таблица category-->
+<!--    id bigserial-->
+<!--    title varchar(255)-->
+
+<!--    таблица manufacturer-->
+<!--    ID   BIGSERIAL    NOT NULL PRIMARY KEY,-->
+<!--    NAME VARCHAR(255) NOT NULL,-->
+
+
+
+    <changeSet id="create_category_table" author="kropotov.artem">
+        <createTable tableName="CATEGORY">
+            <column name="ID" type="BIGSERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="TITLE" type="varchar(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+
+    <changeSet id="create_table_product_category" author="kropotov.artem">
+        <createTable tableName="PRODUCT_CATEGORY">
+            <column name="PRODUCT_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CATEGORY_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey tableName="PRODUCT_CATEGORY" columnNames="PRODUCT_ID, CATEGORY_ID"/>
+        <addForeignKeyConstraint baseTableName="PRODUCT_CATEGORY" baseColumnNames="PRODUCT_ID"
+                                 constraintName="FK_PRODUCT_CATEGORY_PRODUCT"
+                                 referencedTableName="PRODUCT"
+                                 referencedColumnNames="ID"/>
+        <addForeignKeyConstraint baseTableName="PRODUCT_CATEGORY" baseColumnNames="CATEGORY_ID"
+                                 constraintName="FK_PRODUCT_CATEGORY_CATEGORY"
+                                 referencedTableName="CATEGORY"
+                                 referencedColumnNames="ID"/>
+    </changeSet>
+
+</databaseChangeLog>
