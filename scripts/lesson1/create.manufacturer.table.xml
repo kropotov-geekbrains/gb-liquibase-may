@@ -7,9 +7,15 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd
     http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.6.xsd ">
 
-    <include file="lesson1/create.product.table.xml" relativeToChangelogFile="true"/>
-    <include file="lesson1/create.manufacturer.table.xml" relativeToChangelogFile="true"/>
-    <include file="lesson1/create.category.table.xml" relativeToChangelogFile="true"/>
-    <include file="lesson1/create.product_category.table.xml" relativeToChangelogFile="true"/>
+    <changeSet id="create_product_table" author="nimaev">
+        <createTable tableName="MANUFACTURER">
+            <column name="ID" type="BIGSERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="NAME" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
 
 </databaseChangeLog>
