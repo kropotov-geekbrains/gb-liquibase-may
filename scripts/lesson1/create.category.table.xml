@@ -16,9 +16,11 @@
 <!--    ID   BIGSERIAL    NOT NULL PRIMARY KEY,-->
 <!--    NAME VARCHAR(255) NOT NULL,-->
 
+    <changeSet id="before_create_category_table" author="kropotov.artem">
+        <tagDatabase tag="before_create_category_table"/>
+    </changeSet>
 
-
-    <changeSet id="create_category_table" author="kropotov.artem">
+    <changeSet id="create_table.CATEGORY" author="kropotov.artem" context="postgresql" labels="category_table">
         <createTable tableName="CATEGORY">
             <column name="ID" type="BIGSERIAL">
                 <constraints primaryKey="true" nullable="false"/>
@@ -29,26 +31,5 @@
         </createTable>
     </changeSet>
 
-
-    <changeSet id="create_table_product_category" author="kropotov.artem">
-        <createTable tableName="PRODUCT_CATEGORY">
-            <column name="PRODUCT_ID" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="CATEGORY_ID" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <addPrimaryKey tableName="PRODUCT_CATEGORY" columnNames="PRODUCT_ID, CATEGORY_ID"/>
-        <addForeignKeyConstraint baseTableName="PRODUCT_CATEGORY" baseColumnNames="PRODUCT_ID"
-                                 constraintName="FK_PRODUCT_CATEGORY_PRODUCT"
-                                 referencedTableName="PRODUCT"
-                                 referencedColumnNames="ID"/>
-        <addForeignKeyConstraint baseTableName="PRODUCT_CATEGORY" baseColumnNames="CATEGORY_ID"
-                                 constraintName="FK_PRODUCT_CATEGORY_CATEGORY"
-                                 referencedTableName="CATEGORY"
-                                 referencedColumnNames="ID"/>
-    </changeSet>
 
 </databaseChangeLog>
